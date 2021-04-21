@@ -55,7 +55,7 @@ public class User_Manage {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-			output="Error while inserting the Item";
+			output="Error while inserting the user";
 			System.err.println(e.getMessage());
 		}
 		
@@ -103,7 +103,7 @@ public class User_Manage {
 			output+="</tabel>";
 		} catch (Exception e) {
 			// TODO: handle exception
-			output="Error while reading the Posts";
+			output="Error while reading the users";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -144,7 +144,7 @@ public class User_Manage {
 	 } 
 	 catch (Exception e) 
 	 { 
-	 output = "Error while updating the item."; 
+	 output = "Error while updating the User."; 
 	 System.err.println(e.getMessage()); 
 	 } 
 	 return output; 
@@ -172,7 +172,7 @@ public class User_Manage {
 	 } 
 	 catch (Exception e) 
 	 { 
-	 output = "Error while deleting the item."; 
+	 output = "Error while deleting the User."; 
 	 System.err.println(e.getMessage()); 
 	 } 
 	 return output; 

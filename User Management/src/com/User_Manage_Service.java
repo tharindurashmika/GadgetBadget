@@ -36,8 +36,8 @@ public class User_Manage_Service {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String createPost(
-			@FormParam("name") String name,
-			@FormParam("password") String password) {
+			@FormParam("Uname") String name,
+			@FormParam("Upassword") String password) {
 		String output= rp_obj.createPost(name, password); 
 				return output;
 	}
@@ -52,9 +52,9 @@ public class User_Manage_Service {
 		//Convert the input string to a JSON object
 		JsonObject postObj = new JsonParser().parse(postData).getAsJsonObject();
 		
-		String ID = postObj.get("id").getAsString();
-		String name = postObj.get("name").getAsString();
-		String password = postObj.get("password").getAsString();
+		String ID = postObj.get("Uid").getAsString();
+		String name = postObj.get("Uname").getAsString();
+		String password = postObj.get("Upassword").getAsString();
 
 
 		
