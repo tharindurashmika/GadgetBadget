@@ -36,9 +36,10 @@ public class AdminManageService {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String createPost(
-			@FormParam("name") String name,
-			@FormParam("password") String password) {
-		String output= rp_obj.createPost(name, password); 
+			@FormParam("Fname") String name,
+			@FormParam("Ffield") String field,
+			@FormParam("Frange") String range) {
+		String output= rp_obj.createPost(name, field, range); 
 				return output;
 	}
 	
@@ -52,14 +53,14 @@ public class AdminManageService {
 		//Convert the input string to a JSON object
 		JsonObject postObj = new JsonParser().parse(postData).getAsJsonObject();
 		
-		String ID = postObj.get("id").getAsString();
-		String name = postObj.get("name").getAsString();
-		String password = postObj.get("password").getAsString();
-
+		String ID = postObj.get("Fid").getAsString();
+		String name = postObj.get("Fname").getAsString();
+		String field = postObj.get("Ffield").getAsString();
+		String range = postObj.get("Frange").getAsString();
 
 		
 		
-		String output=rp_obj.updatePost(ID, name, password);
+		String output=rp_obj.updatePost(ID, name, field,range);
 		
 		return output;
 	}
@@ -72,7 +73,7 @@ public class AdminManageService {
 	{
 		Document doc= Jsoup.parse(itemData,"",Parser.xmlParser());
 		
-		String ID=doc.select("iduser").text();
+		String ID=doc.select("id").text();
 		
 		String output=rp_obj.deletePost(ID);
 		return output;

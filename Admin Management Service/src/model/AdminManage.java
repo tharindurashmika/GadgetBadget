@@ -24,7 +24,7 @@ public class AdminManage {
 		return con;
 	}
 	
-	public String createPost(String username,String password) {
+	public String createPost(String name,String field,String range) {
 		String output="";
 		
 		try {
@@ -42,13 +42,14 @@ public class AdminManage {
 			LocalTime time= LocalTime.now();
 			
 			
-			String  query= "Insert into user(username,password,published_date,published_time) values(?,?,?,?) ";
+			String  query= "Insert into funding_bodies(name,field,ranges,published_date,published_time) values(?,?,?,?,?) ";
 			PreparedStatement ps=con.prepareStatement(query);
 			
-			ps.setString(1, username);
-			ps.setString(2, password);
-			ps.setString(3,date.toString());
-			ps.setString(4,time.toString());
+			ps.setString(1,name);
+			ps.setString(2,field);
+			ps.setString(3,range);
+			ps.setString(4,date.toString());
+			ps.setString(5,time.toString());
 			ps.execute();
 			con.close();
 			
@@ -72,22 +73,24 @@ public class AdminManage {
 			{
 				return "Error";
 			}
-			output="<table><tr><th>Funding Body ID</th><th>username</th><th>password</th><th>Published Date</th><th>Published Time</th><th>Update</th><th>Remove</th></tr>";
-			String query="select * from user";
+			output="<table><tr><th>Funding Body ID</th><th>name</th><th>field</th><th>range</th><th>Published Date</th><th>Published Time</th><th>Update</th><th>Remove</th></tr>";
+			String query="select * from funding_bodies";
 			Statement st= con.createStatement();
 			ResultSet rs= st.executeQuery(query);
 			
 			while(rs.next())
 			{
-				String id= Integer.toString(rs.getInt("iduser"));
-				String username= rs.getString("username");
-				String password = rs.getString("password");
+				String id= Integer.toString(rs.getInt("id"));
+				String name= rs.getString("name");
+				String field = rs.getString("field");
+				String range = rs.getString("ranges");
 				String date = rs.getString("published_date");// How to Get Date as A String - Doubt - Solved 2021/04/11
 				String time = rs.getString("published_time");// How to Get Date as A String - Doubt - Solved 2021/04/11
 				
 				output +="<tr><td>"+id+"</td>";
-				output +="<td>"+username+"</td>";
-				output +="<td>"+password+"</td>";
+				output +="<td>"+name+"</td>";
+				output +="<td>"+field+"</td>";
+				output +="<td>"+range+"</td>";
 				output +="<td>"+date+"</td>";
 				output +="<td>"+time+"</td>";
 				
@@ -111,7 +114,7 @@ public class AdminManage {
 	}
 	
 	
-	public String updatePost(String ID,String username,String password) 
+	public String updatePost(String ID,String name,String field, String range) 
 	 { 
 	 String output = ""; 
 	 try
@@ -130,14 +133,15 @@ public class AdminManage {
 		LocalDate date= LocalDate.now();
 		LocalTime time= LocalTime.now();
 	 
-	 String query = "UPDATE user SET username=?,password=?,published_date=?,published_time=? WHERE iduser=?"; 
+	 String query = "UPDATE funding_bodies SET name=?,field=?,ranges=?,published_date=?,published_time=? WHERE id=?"; 
 	 PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 // binding values
-	 preparedStmt.setString(1, username); 
-	 preparedStmt.setString(2, password);
-	 preparedStmt.setString(3, date.toString()); 
-	 preparedStmt.setString(4, time.toString()); 
-	 preparedStmt.setInt(5, Integer.parseInt(ID)); 
+	 preparedStmt.setString(1, name); 
+	 preparedStmt.setString(2, field);
+	 preparedStmt.setString(3, range);
+	 preparedStmt.setString(4, date.toString()); 
+	 preparedStmt.setString(5, time.toString()); 
+	 preparedStmt.setInt(6, Integer.parseInt(ID)); 
 	 // execute the statement
 	 preparedStmt.execute(); 
 	 con.close(); 
@@ -162,7 +166,7 @@ public class AdminManage {
 	 if (con == null) 
 	 {return "Error while connecting to the database for deleting."; } 
 	 // create a prepared statement
-	 String query = "delete from user where iduser=?"; 
+	 String query = "delete from funding_bodies where id=?"; 
 	 PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 // binding values
 	 preparedStmt.setInt(1, Integer.parseInt(ID)); 
