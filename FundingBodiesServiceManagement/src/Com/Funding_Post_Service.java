@@ -54,7 +54,7 @@ public class Funding_Post_Service {
 		
 		String ID = postObj.get("itemID").getAsString();
 		String title = postObj.get("title").getAsString();
-		String content = postObj.get("conten").getAsString();
+		String content = postObj.get("content").getAsString();
 
 		
 		

@@ -35,8 +35,7 @@ public class Funding_Posts {
 			LocalDate date= LocalDate.now();
 			LocalTime time= LocalTime.now();
 			String  query= "insert into Funding_Bodies_Post(title,content,published_date,published_time)"
-							+
-							" values(?,?,?,?) ";
+							+" values(?,?,?,?) ";
 			PreparedStatement ps=con.prepareStatement(query);
 			
 			ps.setString(1, title);
@@ -77,8 +76,8 @@ public class Funding_Posts {
 				String Post_id= Integer.toString(rs.getInt("id"));
 				String Post_title= rs.getString("title");
 				String content = rs.getString("content");
-				String date = rs.getString("");// How to Get Date as A String - Doubt
-				String time = rs.getString("");// How to Get Date as A String - Doubt
+				String date = rs.getString("published_date");// How to Get Date as A String - Doubt
+				String time = rs.getString("published_time");// How to Get Date as A String - Doubt
 				
 				output +="<tr><td>"+Post_id+"</td>";
 				output +="<tr><td>"+Post_title+"</td>";
