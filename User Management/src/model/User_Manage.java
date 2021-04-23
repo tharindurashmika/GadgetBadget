@@ -71,7 +71,7 @@ public class User_Manage {
 			{
 				return "Error";
 			}
-			output="<table><tr><th>Funding Body ID</th><th>username</th><th>password</th><th>Published Date</th><th>Published Time</th><th>Update</th><th>Remove</th></tr>";
+			output="<table><tr><th>User ID</th><th>username</th><th>password</th><th>Published Date</th><th>Published Time</th><th>Update</th><th>Remove</th></tr>";
 			String query="select * from user";
 			Statement st= con.createStatement();
 			ResultSet rs= st.executeQuery(query);
